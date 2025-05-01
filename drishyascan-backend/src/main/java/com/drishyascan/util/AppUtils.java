@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * Utility class that provides helper methods for the application.
  */
-@Component
+
 public class AppUtils {
     
     /**

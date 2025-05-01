@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
  * Contains application configuration classes.
  * This will include Bean configurations, Security settings, etc.
  */
-@Configuration
+//@Configuration
 public class AppConfig {
     // Core application configuration will go here
 }

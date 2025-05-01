@@ -10,7 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 /**
  * Security configuration for the application.
  */
-@Configuration
+//@Configuration
 @EnableWebSecurity
 public class SecurityConfig {
     

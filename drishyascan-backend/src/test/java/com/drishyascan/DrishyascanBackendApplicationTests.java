@@ -1,4 +1,4 @@
-package com.drishyascan.drishyascan;
+package com.drishyascan;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
