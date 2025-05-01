@@ -1,0 +1,19 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "drishyascan",
+            "database": "drishyascan",
+            "username": "root",
+            "password": "12120007@Yash",
+            "connectionTimeout": 30
+        }
+    ]
+}
