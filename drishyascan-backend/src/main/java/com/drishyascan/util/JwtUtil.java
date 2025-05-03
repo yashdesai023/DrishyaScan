@@ -1,4 +1,4 @@
-package com.drishyascan.security;
+package com.drishyascan.util;
 
 import com.drishyascan.model.User;
 import io.jsonwebtoken.Claims;
