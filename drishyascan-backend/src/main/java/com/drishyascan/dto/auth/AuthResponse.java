@@ -1,4 +1,3 @@
-// AuthResponse.java
 package com.drishyascan.dto.auth;
 
 import com.drishyascan.dto.UserDto;
@@ -30,5 +29,10 @@ public class AuthResponse {
 
     public void setUser(UserDto user) {
         this.user = user;
+    }
+
+    // Method to get email from the user object
+    public String getEmail() {
+        return this.user != null ? this.user.getEmail() : null;  // Return email from UserDto if user is not null
     }
 }

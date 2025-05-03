@@ -5,6 +5,8 @@ import com.drishyascan.dto.auth.LoginRequest;
 import com.drishyascan.dto.auth.RegisterRequest;
 import com.drishyascan.service.auth.AuthService;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")  // Keep this as /auth based on your URL patterns
 public class AuthController {
-
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
     private final AuthService authService;
 
     public AuthController(AuthService authService) {
@@ -29,16 +31,10 @@ public class AuthController {
      */
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
-        try {
-            AuthResponse response = authService.register(request);
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
-        } catch (IllegalArgumentException e) {
-            // Return 400 Bad Request for validation errors
-            throw e;
-        } catch (Exception e) {
-            // Return 500 Internal Server Error for unexpected errors
-            throw new RuntimeException("Failed to register user: " + e.getMessage());
-        }
+        logger.info("Registration request received for email: {}", request.getEmail());
+        AuthResponse response = authService.register(request);
+        logger.info("Registration successful for user: {}", response.getEmail());
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     /**
@@ -48,15 +44,9 @@ public class AuthController {
      */
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
-        try {
-            AuthResponse response = authService.login(request);
-            return ResponseEntity.ok(response);
-        } catch (IllegalArgumentException e) {
-            // Return 400 Bad Request for validation errors
-            throw e;
-        } catch (Exception e) {
-            // Return 500 Internal Server Error for unexpected errors
-            throw new RuntimeException("Failed to authenticate user: " + e.getMessage());
-        }
+        logger.info("Login request received for email: {}", request.getEmail());
+        AuthResponse response = authService.login(request);
+        logger.info("Login successful for user: {}", response.getEmail());
+        return ResponseEntity.ok(response);
     }
 }

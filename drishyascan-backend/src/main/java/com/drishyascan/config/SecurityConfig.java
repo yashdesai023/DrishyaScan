@@ -44,8 +44,8 @@ public class SecurityConfig {
             )
             // Configure authorization rules
             .authorizeHttpRequests(auth -> auth
-                // Public endpoints
-                .requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
+                // Public endpoints - just use /auth/** since we're updating the controller
+                .requestMatchers("/auth/**").permitAll()
                 // Swagger/OpenAPI endpoints
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 // All other requests need authentication

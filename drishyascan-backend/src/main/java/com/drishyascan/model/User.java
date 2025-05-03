@@ -21,7 +21,6 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "users")
-@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -71,12 +70,7 @@ public class User {
     @Column(name = "profile_image_url", length = 512)
     private String profileImageUrl;
 
-    /**
-     * Returns the full name of the user by combining firstName and lastName.
-     * 
-     * @return the full name, or just the first/last name if one is missing,
-     *         or "Unnamed User" if both are missing
-     */
+    // Custom getter for full name
     @Transient
     public String getFullName() {
         if (firstName != null && lastName != null) {
@@ -90,8 +84,98 @@ public class User {
         }
     }
 
+    // Custom getter for email
+    public String getEmail() {
+        return this.email;
+    }
+
+    // Standard getters and setters
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPasswordHash() {
+        return this.passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public UserRole getRole() {
+        return this.role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Boolean getActive() {
+        return this.active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public LocalDateTime getLastLoginAt() {
+        return this.lastLoginAt;
+    }
+
+    public void setLastLoginAt(LocalDateTime lastLoginAt) {
+        this.lastLoginAt = lastLoginAt;
+    }
+
+    public String getProfileImageUrl() {
+        return this.profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
+
+    // Is active method
     public boolean isActive() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isActive'");
+        return Boolean.TRUE.equals(active);
     }
 }
