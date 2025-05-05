@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Uses @DataJpaTest to set up an in-memory database for testing.
  */
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @ActiveProfiles("test")
 @Transactional
 public class UserRepositoryTest {

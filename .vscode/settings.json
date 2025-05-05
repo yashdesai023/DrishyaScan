@@ -15,5 +15,6 @@
             "password": "12120007@Yash",
             "connectionTimeout": 30
         }
-    ]
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
 }
