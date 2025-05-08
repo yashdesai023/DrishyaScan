@@ -168,9 +168,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Developer
 
 - **Name**: Yash Desai
-- **Email**: [desaisyash1000@gmail.com]
-- **LinkedIn**: [https://www.linkedin.com/in/yash-s-desai-/]
-- **Contact No**: [9860639222]
+- **Email**: desaisyash1000@gmail.com
+- **LinkedIn**: https://www.linkedin.com/in/yash-s-desai-/
+- **Contact No**: 9860639222
 
 ## 📞 Support
 
