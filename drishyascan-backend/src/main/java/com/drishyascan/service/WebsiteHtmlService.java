@@ -10,8 +10,8 @@ import java.util.UUID;
  * Service for fetching HTML content from websites.
  * For now, this is a simulation that generates realistic HTML.
  */
-@Service
 @Slf4j
+@Service
 public class WebsiteHtmlService {
 
     private final Random random = new Random();

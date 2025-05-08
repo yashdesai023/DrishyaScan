@@ -1,1 +1,0 @@
-"# DrishyaScan Frontend" 

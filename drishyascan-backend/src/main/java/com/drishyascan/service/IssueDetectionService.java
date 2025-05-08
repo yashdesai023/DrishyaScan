@@ -19,9 +19,9 @@ import java.util.stream.Collectors;
  * Service for detecting accessibility issues in HTML content.
  * This is a simulation that generates random but realistic-looking accessibility issues.
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class IssueDetectionService {
 
     private final IssueRepository issueRepository;

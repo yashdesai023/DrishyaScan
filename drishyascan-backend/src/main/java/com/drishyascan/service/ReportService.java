@@ -21,9 +21,9 @@ import java.util.stream.Collectors;
 /**
  * Service for generating various types of reports for accessibility scans.
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class ReportService {
 
     private final WebsiteScanResultRepository scanResultRepository;

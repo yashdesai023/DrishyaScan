@@ -1,0 +1,12 @@
+<!-- Theme detection script (add this before the closing head tag) -->
+<script>
+  // Check for saved theme preference or use the system preference
+  const savedTheme = localStorage.getItem('theme');
+  
+  if (savedTheme === 'dark' || 
+     (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+</script>

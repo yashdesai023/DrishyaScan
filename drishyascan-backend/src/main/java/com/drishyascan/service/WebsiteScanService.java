@@ -30,9 +30,9 @@ import java.util.stream.Collectors;
 /**
  * Service for handling website accessibility scans.
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class WebsiteScanService {
 
     private final WebsiteScanResultRepository scanResultRepository;

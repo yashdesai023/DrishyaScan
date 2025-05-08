@@ -1,32 +1,66 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
     content: [
-      "./index.html",
-      "./src/**/*.{js,ts,jsx,tsx}",
+      "./src/**/*.{js,jsx,ts,tsx}",
+      "./public/index.html",
     ],
+    darkMode: 'class', // Enable class-based dark mode
     theme: {
-      extend: {colors: {
-        primary: "#2563EB",
-        "primary-hover": "#1D4ED8",
-        accent: "#7C3AED",
-        success: "#10B981",
-        warning: "#F59E0B",
-        error: "#EF4444",
-        // Light theme
-        "light-bg": "#FFFFFF",
-        "light-bg-secondary": "#F9FAFB",
-        "light-text-primary": "#111827",
-        "light-text-secondary": "#6B7280",
-        "light-border": "#E5E7EB",
-        // Dark theme
-        "dark-bg": "#0F172A",
-        "dark-bg-secondary": "#1E293B",
-        "dark-text-primary": "#F1F5F9",
-        "dark-text-secondary": "#94A3B8",
-        "dark-border": "#334155",
-      },},
+      extend: {
+        fontFamily: {
+          sans: ['Roboto', 'sans-serif'],
+        },
+        colors: {
+          // Brand colors
+          primary: {
+            DEFAULT: '#2563EB', // Primary Blue
+            hover: '#1D4ED8',
+          },
+          accent: {
+            DEFAULT: '#7C3AED', // Accent Purple
+          },
+          success: {
+            DEFAULT: '#10B981', // Success Green
+          },
+          warning: {
+            DEFAULT: '#F59E0B', // Warning Yellow
+          },
+          error: {
+            DEFAULT: '#EF4444', // Error Red
+          },
+          
+          // Light theme
+          light: {
+            bg: {
+              primary: '#FFFFFF',
+              secondary: '#F9FAFB',
+              card: '#FFFFFF',
+            },
+            text: {
+              primary: '#111827',
+              secondary: '#6B7280',
+            },
+            border: '#E5E7EB',
+          },
+          
+          // Dark theme
+          dark: {
+            bg: {
+              primary: '#0F172A',
+              secondary: '#1E293B',
+              card: '#1E293B',
+            },
+            text: {
+              primary: '#F1F5F9',
+              secondary: '#94A3B8',
+            },
+            border: '#334155',
+          },
+        },
+        transitionDuration: {
+          'theme': '400ms', // Theme transition time (between 0.3s and 0.5s)
+        },
+      },
     },
     plugins: [],
-    darkMode: "selector",
   }
-  
