@@ -1,16 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #121212;
+  color: #ffffff;
 }
 
 code {
@@ -18,35 +22,53 @@ code {
     monospace;
 }
 
-/* Base styles */
-@layer base {
-  body {
-    @apply bg-light-bg-primary text-light-text-primary dark:bg-dark-bg-primary dark:text-dark-text-primary;
-    transition: background-color theme-transition-duration theme-300, color theme-300;
-  }
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
-/* Custom components */
-@layer components {
-  .card {
-    @apply bg-light-bg-card dark:bg-dark-bg-card rounded-lg shadow-md p-6;
-    transition: background-color theme-300;
-  }
-  
-  .btn-primary {
-    @apply bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-hover;
-    transition: background-color theme-300;
-  }
-  
-  .section {
-    @apply bg-light-bg-secondary dark:bg-dark-bg-secondary p-6 rounded-lg;
-    transition: background-color theme-300;
-  }
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-/* Smooth transitions for theme changes */
-* {
-  transition-property: color, background-color, border-color;
-  transition-duration: 400ms;
-  transition-timing-function: ease-in-out;
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2563EB;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3B82F6;
+}
+
+/* Selection color */
+::selection {
+  background: #2563EB;
+  color: #ffffff;
+}
+
+/* Links */
+a {
+  color: #2563EB;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #3B82F6;
+}
+
+/* Focus outline */
+:focus {
+  outline: 2px solid #2563EB;
+  outline-offset: 2px;
+}
+
+/* Remove focus outline for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
 }

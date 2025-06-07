@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080/api';
+const API_BASE_URL = 'http://localhost:8081/api';
 
-// Create axios instance
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -10,7 +9,7 @@ const api = axios.create({
   },
 });
 
-// Request interceptor for adding auth token
+// Add request interceptor to add auth token
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
@@ -24,7 +23,7 @@ api.interceptors.request.use(
   }
 );
 
-// Response interceptor for handling errors
+// Add response interceptor to handle errors
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -36,5 +35,16 @@ api.interceptors.response.use(
   }
 );
 
-// Export the axios instance
+export const authApi = {
+  register: (userData) => api.post('/auth/register', userData),
+  login: (credentials) => api.post('/auth/login', credentials),
+};
+
+export const dashboardApi = {
+  getDashboardData: () => api.get('/dashboard'),
+  getRecentScans: () => api.get('/dashboard/recent-scans'),
+  getIssueDistribution: () => api.get('/dashboard/issue-distribution'),
+  getAccessibilityTrend: () => api.get('/dashboard/accessibility-trend'),
+};
+
 export default api; 

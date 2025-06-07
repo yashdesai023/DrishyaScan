@@ -1,205 +1,172 @@
-import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { ThemeProvider } from './context/ThemeContext';
-import { MainLayout, AuthLayout } from './components/layout';
+import React, { useState, useMemo } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { Box } from '@mui/material';
+import Layout from './components/layout/Layout';
+import ProtectedLayout from './components/layout/ProtectedLayout';
+import LandingPage from './pages/landing/LandingPage';
+import LoginPage from './pages/login/LoginPage';
+import RegisterPage from './pages/register/RegisterPage';
+import Dashboard from './pages/dashboard/Dashboard';
+import ProjectManagementPage from './pages/ProjectManagementPage';
+import WebsiteManagementPage from './pages/WebsiteManagementPage';
+import WebsiteDetailPage from './pages/WebsiteDetailPage';
+import ScanningPage from './pages/scanning/ScanningPage';
+import IssuesListPage from './pages/issues/IssuesListPage';
+import Report from './pages/Report';
 
-// Import your page components (create placeholder components for now)
-// You'll replace these with actual implementations later
-const Dashboard = () => (
-  <section className="card mb-6">
-    <h2 className="text-xl font-semibold mb-4">Welcome to DrishyaScan</h2>
-    <p className="text-light-text-secondary dark:text-dark-text-secondary">
-      Your Web Accessibility Analyzer Tool
-    </p>
-    <button className="btn-primary mt-4">Get Started</button>
-  </section>
-);
+// Protected Route Component
+const ProtectedRoute = ({ children }) => {
+  const location = useLocation();
+  const token = localStorage.getItem('token');
 
-const Features = () => (
-  <section className="section">
-    <h2 className="text-xl font-semibold mb-4">Features</h2>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div className="card">
-        <h3 className="font-medium">Scan Websites</h3>
-        <p className="text-light-text-secondary dark:text-dark-text-secondary">
-          Analyze websites for accessibility issues
-        </p>
-      </div>
-      <div className="card">
-        <h3 className="font-medium">Track Progress</h3>
-        <p className="text-light-text-secondary dark:text-dark-text-secondary">
-          Monitor improvements over time
-        </p>
-      </div>
-      <div className="card">
-        <h3 className="font-medium">Fix Issues</h3>
-        <p className="text-light-text-secondary dark:text-dark-text-secondary">
-          Get detailed remediation guidance
-        </p>
-      </div>
-    </div>
-  </section>
-);
+  if (!token) {
+    return <Navigate to="/login" state={{ from: location, message: 'Please login to access this page' }} replace />;
+  }
 
-// Placeholder components for other pages
-const Projects = () => <div>Projects Page</div>;
-const Websites = () => <div>Websites Page</div>;
-const Scans = () => <div>Scans Page</div>;
-const Issues = () => <div>Issues Page</div>;
-const Reports = () => <div>Reports Page</div>;
-const Settings = () => <div>Settings Page</div>;
-const Login = () => <div>Login Form</div>;
-const Register = () => <div>Register Form</div>;
-const NotFound = () => <div>Page Not Found</div>;
-
-// Sample HomePage that combines your existing content
-const HomePage = () => (
-  <>
-    <Dashboard />
-    <Features />
-  </>
-);
+  return children;
+};
 
 function App() {
-  // You would implement actual auth state management here
-  const isAuthenticated = true; // Example: replace with actual auth state
+  const [mode, setMode] = useState('light');
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+          ...(mode === 'light'
+            ? {
+                // Light mode palette
+          primary: {
+            main: '#2563EB',
+          },
+          secondary: {
+                  main: '#7C3AED', // Accent Purple
+                },
+                success: {
+                  main: '#10B981',
+                },
+                warning: {
+                  main: '#F59E0B',
+                },
+                error: {
+                  main: '#EF4444',
+                },
+                background: {
+                  default: '#FFFFFF', // Pure White
+                  paper: '#F9FAFB', // Soft Light Grey
+                },
+                text: {
+                  primary: '#111827', // Dark Charcoal
+                  secondary: '#6B7280', // Muted Gray
+                },
+                divider: '#E5E7EB', // Borders
+              }
+            : {
+                // Dark mode palette
+                primary: {
+                  main: '#3B82F6', // Lighter Blue for dark mode button primary
+                },
+                secondary: {
+                  main: '#7C3AED', // Accent Purple
+                },
+                success: {
+                  main: '#10B981',
+                },
+                warning: {
+                  main: '#F59E0B',
+                },
+                error: {
+                  main: '#EF4444',
+          },
+          background: {
+                  default: '#0F172A', // Deep Navy
+                  paper: '#1E293B', // Dark Blue-Grey
+          },
+          text: {
+                  primary: '#F1F5F9', // Almost White
+                  secondary: '#94A3B8', // Soft Gray-Blue
+          },
+                divider: '#334155', // Subtle Borders
+              }),
+        },
+        typography: {
+          fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+          h1: {
+            fontWeight: 700,
+          },
+          h2: {
+            fontWeight: 600,
+          },
+          h3: {
+            fontWeight: 600,
+          },
+        },
+        components: {
+          MuiButton: {
+            styleOverrides: {
+              root: {
+                borderRadius: 8,
+                textTransform: 'none',
+                fontWeight: 600,
+              },
+            },
+          },
+        },
+      }),
+    [mode],
+  );
+
+  const toggleTheme = () => {
+    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+  };
 
   return (
-    <ThemeProvider>
-      <Router>
-        <Routes>
-          {/* Auth Routes */}
-          <Route 
-            path="/login" 
-            element={
-              isAuthenticated ? (
-                <Navigate to="/dashboard" replace />
-              ) : (
-                <AuthLayout title="Sign In">
-                  <Login />
-                </AuthLayout>
-              )
-            } 
-          />
-          <Route 
-            path="/register" 
-            element={
-              isAuthenticated ? (
-                <Navigate to="/dashboard" replace />
-              ) : (
-                <AuthLayout title="Create Account">
-                  <Register />
-                </AuthLayout>
-              )
-            } 
-          />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+        <Router>
+            <Routes>
+          {/* Public routes */}
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
 
-          {/* Protected Routes */}
-          <Route
-            path="/dashboard"
-            element={
-              isAuthenticated ? (
-                <MainLayout title="Dashboard">
-                  <HomePage />
-                </MainLayout>
-              ) : (
-                <Navigate to="/login" replace />
-              )
-            }
-          />
-          <Route
-            path="/projects"
-            element={
-              isAuthenticated ? (
-                <MainLayout title="Projects">
-                  <Projects />
-                </MainLayout>
-              ) : (
-                <Navigate to="/login" replace />
-              )
-            }
-          />
-          <Route
-            path="/websites"
-            element={
-              isAuthenticated ? (
-                <MainLayout title="Websites">
-                  <Websites />
-                </MainLayout>
-              ) : (
-                <Navigate to="/login" replace />
-              )
-            }
-          />
-          <Route
-            path="/scans"
-            element={
-              isAuthenticated ? (
-                <MainLayout title="Accessibility Scans">
-                  <Scans />
-                </MainLayout>
-              ) : (
-                <Navigate to="/login" replace />
-              )
-            }
-          />
-          <Route
-            path="/issues"
-            element={
-              isAuthenticated ? (
-                <MainLayout title="Issues">
-                  <Issues />
-                </MainLayout>
-              ) : (
-                <Navigate to="/login" replace />
-              )
-            }
-          />
-          <Route
-            path="/reports"
-            element={
-              isAuthenticated ? (
-                <MainLayout title="Reports">
-                  <Reports />
-                </MainLayout>
-              ) : (
-                <Navigate to="/login" replace />
-              )
-            }
-          />
-          <Route
-            path="/settings"
-            element={
-              isAuthenticated ? (
-                <MainLayout title="Settings">
-                  <Settings />
-                </MainLayout>
-              ) : (
-                <Navigate to="/login" replace />
-              )
-            }
-          />
+          {/* Routes with layout */}
+          <Route path="/" element={<Layout onThemeToggle={toggleTheme} isDarkMode={mode === 'dark'}> 
+            <Routes>
+              <Route index element={<LandingPage />} />
+            </Routes>
+          </Layout>} />
 
-          {/* Redirect root to dashboard or login */}
-          <Route
-            path="/"
-            element={
-              <Navigate to={isAuthenticated ? "/dashboard" : "/login"} replace />
-            }
-          />
-
-          {/* 404 route */}
-          <Route
-            path="*"
-            element={
-              <AuthLayout title="Page Not Found">
-                <NotFound />
-              </AuthLayout>
-            }
-          />
-        </Routes>
-      </Router>
+          {/* Protected routes with protected layout */}
+              <Route
+            path="/user/*"
+                element={
+                  <ProtectedRoute>
+                <ProtectedLayout onThemeToggle={toggleTheme} isDarkMode={mode === 'dark'}>
+                  <Routes>
+                    <Route index element={<Navigate to="/user/dashboard" replace />} />
+                    <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="projects" element={<ProjectManagementPage />} />
+                    <Route path="projects/:projectId/websites" element={<WebsiteManagementPage />} />
+                    <Route path="websites" element={<WebsiteManagementPage />} />
+                    <Route path="projects/:projectId/websites/:websiteId" element={<WebsiteDetailPage />} />
+                    <Route path="projects/:projectId/websites/:websiteId/scan" element={<ScanningPage />} />
+                    <Route path="projects/:projectId/websites/:websiteId/issues" element={<IssuesListPage />} />
+                    <Route path="projects/:projectId/reports" element={<Report />} />
+                    <Route path="scans" element={<ScanningPage />}/>
+                    <Route path="issues" element={<IssuesListPage />} />
+                    <Route path="reports" element={<Report />} />
+                    <Route path="settings" element={<div>Settings Page (Coming Soon)</div>} />
+                    <Route path="*" element={<div>Page Not Found</div>} />
+                  </Routes>
+                </ProtectedLayout>
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+        </Router>
     </ThemeProvider>
   );
 }
