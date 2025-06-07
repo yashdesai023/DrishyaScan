@@ -68,7 +68,7 @@ mvn clean install
 mvn spring-boot:run
 ```
 
-The backend will be available at `http://localhost:8080`
+The backend will be available at `http://localhost:8081`
 
 ### Frontend Setup
 
@@ -165,21 +165,16 @@ mvn clean package
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👥 Team
+## Developer
 
-### Project Lead
-- **Name**: [Your Name]
-- **Email**: your.email@example.com
-- **LinkedIn**: [Your LinkedIn Profile]
-
-### Core Developers
-- **Name**: [Developer Name]
-- **Email**: developer.email@example.com
-- **LinkedIn**: [Developer LinkedIn Profile]
+- **Name**: Yash Desai
+- **Email**: desaisyash1000@gmail.com
+- **LinkedIn**: https://www.linkedin.com/in/yash-s-desai-/
+- **Contact No**: 9860639222
 
 ## 📞 Support
 
-For support, please email support@drishyascan.com or create an issue in the GitHub repository.
+For support, please email **drishyascan.support@gmail.com** or create an issue in the GitHub repository.
 
 ## 🙏 Acknowledgments
 
@@ -200,4 +195,4 @@ For detailed project documentation, please refer to:
 
 ---
 
-Made with ❤️ by the DrishyaScan Team
+Made with ❤️ by the DrishyaScan 
